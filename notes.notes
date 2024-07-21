@@ -1,124 +1,130 @@
-+---------------------------------------------------+
-| Going Forward-Forward in Distributed Deep Learning|
-+---------------------------------------------------+
-                 |
-                 +------------------------------+
-                 |        Title & Authors       |
-                 | - Title: Going Forward-      |
-                 |   Forward                    |
-                 | - Authors: Ege Aktemur,      |
-                 |   Ege Zorlutuna, Kaan        |
-                 |   Bilgili, Tacettin Emre     |
-                 |   Bök, Berrin Yanikoglu,     |
-                 |   Süha Orhun Mutluergil      |
-                 | - Institution: Sabanci       |
-                 |   University, Istanbul,      |
-                 |   Turkey                     |
-                 +------------------------------+
-                 |
-                 +------------------------------+
-                 |          Abstract            |
-                 | - Objective: Introduce a     |
-                 |   new approach using         |
-                 |   Geoffrey Hinton’s          |
-                 |   Forward-Forward (FF)       |
-                 |   algorithm                  |
-                 | - Methodology: Dual forward  |
-                 |   passes instead of          |
-                 |   backpropagation            |
-                 | - Benefits: Efficient,       |
-                 |   biologically plausible,    |
-                 |   mimics brain processes     |
-                 | - Results: 3.75x speedup on  |
-                 |   MNIST, no accuracy loss    |
-                 | - Implications: Potential    |
-                 |   revolution in distributed  |
-                 |   training                   |
-                 +------------------------------+
-                 |
-                 +------------------------------+
-                 |        Introduction          |
-                 | - Traditional Backprop       |
-                 |   Challenges: Sequential     |
-                 |   nature, dependency, high   |
-                 |   communication overhead     |
-                 | - FF Algorithm: Local        |
-                 |   computations, dual forward |
-                 |   passes (positive &         |
-                 |   negative), biologically    |
-                 |   plausible                  |
-                 +------------------------------+
-                 |
-                 +------------------------------+
-                 |      Literature Review       |
-                 | - Existing Frameworks:       |
-                 |   PipeDream, GPipe, Local    |
-                 |   Parallelism                |
-                 | - FF Algorithm by Hinton:    |
-                 |   Concept, goodness function |
-                 +------------------------------+
-                 |
-                 +------------------------------+
-                 |         PFF Algorithm        |
-                 | - Integration: Improve       |
-                 |   efficiency in distributed  |
-                 |   training                   |
-                 | - Variants: Single-Layer     |
-                 |   PFF, All-Layers PFF,       |
-                 |   Federated PFF, Performance-|
-                 |   Optimized PFF              |
-                 +------------------------------+
-                 |
-                 +------------------------------+
-                 |     FF Algorithm Details     |
-                 | - Training Process: Positive |
-                 |   & negative passes          |
-                 | - Goodness Function: Sum of  |
-                 |   squares of neuron          |
-                 |   activities                 |
-                 | - Prediction Methods:        |
-                 |   Goodness prediction,       |
-                 |   softmax                    |
-                 +------------------------------+
-                 |
-                 +------------------------------+
-                 |  Experimental Evaluation     |
-                 | - Setup: Network config,     |
-                 |   dataset, training,         |
-                 |   optimizer                  |
-                 | - Results: AdaptiveNEG,      |
-                 |   RandomNEG, Performance-    |
-                 |   Optimized PFF              |
-                 +------------------------------+
-                 |
-                 +------------------------------+
-                 |  Comparison with Other Models|
-                 | - Hinton's Matlab            |
-                 |   Implementation             |
-                 | - DFF (Distributed FF)       |
-                 | - PFF Variants: Single-Layer,|
-                 |   All-Layers                 |
-                 +------------------------------+
-                 |
-                 +------------------------------+
-                 |  Evaluation with CIFAR-10    |
-                 | - Complexity: Higher         |
-                 |   variability and complexity |
-                 | - Results: Performance-      |
-                 |   Optimized PFF, AdaptiveNEG |
-                 | - Implications: Need for     |
-                 |   further research           |
-                 +------------------------------+
-                 |
-                 +------------------------------+
-                 | Conclusion and Future Work   |
-                 | - Significance: More         |
-                 |   efficient and scalable     |
-                 |   approach                   |
-                 | - Future Directions: Parameter|
-                 |   exchanges, federated       |
-                 |   learning, communication    |
-                 |   optimization, negative     |
-                 |   sample generation, general |
-                 |   framework development      |
-                 +------------------------------+
+
+
+#### Title & Authors:
+- **Title:** Going Forward-Forward in Distributed Deep Learning
+- **Authors:** Ege Aktemur, Ege Zorlutuna, Kaan Bilgili, Tacettin Emre Bök, Berrin Yanikoglu, Süha Orhun Mutluergil
+- **Institution:** Sabanci University, Istanbul, Turkey
+
+---
+
+#### Abstract:
+
+| **Cues/Keywords**                                   | **Main Notes**                                                                                                   |
+|-----------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| Objective                                           | Introduce a novel approach to distributed deep learning using Geoffrey Hinton’s Forward-Forward (FF) algorithm.  |
+| Methodology                                         | The FF algorithm uses dual forward passes instead of traditional forward and backward passes in backpropagation. |
+| Benefits                                            | More efficient and biologically plausible, aligns with brain processing mechanisms.                              |
+| Results                                             | Achieved a 3.75x speedup on the MNIST dataset without compromising accuracy.                                      |
+| Implications                                        | Represents a significant step forward in distributed deep learning.                                              |
+
+---
+
+#### Introduction:
+
+| **Cues/Keywords**                                   | **Main Notes**                                                                                                   |
+|-----------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| Challenges with Backpropagation                     | Sequential nature, dependency on gradients, high communication overhead.                                          |
+| Sequential Nature                                   | Each layer must wait for gradient updates from the next layer, causing delays in distributed settings.           |
+| Dependency and Synchronization                      | Gradient of each layer depends on the next layer, requiring extensive synchronization between nodes.             |
+| Communication Overhead                              | Constant communication between nodes for gradient and weight transfer, burdensome for large-scale networks.      |
+| Forward-Forward (FF) Algorithm                      | Uses local, layer-wise computations and dual forward passes (positive and negative) to update weights.           |
+| Local Computations                                  | Each layer is trained independently, reducing dependencies.                                                      |
+| Dual Forward Passes                                 | Positive pass increases the "goodness" of real data, negative pass decreases the "goodness" of negative data.    |
+| Biological Plausibility                             | Inspired by the brain’s processing mechanisms, making it more plausible than traditional backpropagation.         |
+
+---
+
+#### Literature Review:
+
+| **Cues/Keywords**                                   | **Main Notes**                                                                                                   |
+|-----------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| Existing Distributed Training Frameworks            | PipeDream, GPipe, Local Parallelism.                                                                              |
+| PipeDream                                           | Combines data, pipeline, and model parallelism but still relies on backpropagation, leading to efficiency issues. |
+| GPipe                                               | Similar to PipeDream, uses synchronous weight updates during the backward pass.                                   |
+| Local Parallelism                                   | Divides network into blocks, trains independently, but local loss may not align with the global objective.         |
+| Forward-Forward Algorithm by Geoffrey Hinton        | Trains each layer independently using positive and negative passes, reducing dependencies.                       |
+| Goodness Function                                   | Measures sum of squares of neuron activities; positive pass increases goodness for real data, negative pass decreases for negative data. |
+
+---
+
+#### Pipeline Forward-Forward (PFF) Algorithm:
+
+| **Cues/Keywords**                                   | **Main Notes**                                                                                                   |
+|-----------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| Integration into Distributed Deep Learning          | Improves efficiency and effectiveness of training large-scale neural networks.                                     |
+| Objective                                           | Enhance distributed training by integrating the FF algorithm.                                                     |
+| Variants                                            | Single-Layer PFF, All-Layers PFF, Federated PFF, Performance-Optimized PFF.                                        |
+| Single-Layer PFF                                    | Each node trains a specific layer independently, achieving parallelism and reducing idle time.                    |
+| All-Layers PFF                                      | Each node trains all layers in turn, balancing the load more evenly across nodes.                                 |
+| Federated PFF                                       | Nodes train on local datasets, preserving data privacy, suitable for federated learning scenarios.                |
+| Performance-Optimized PFF                           | Incorporates a new goodness function based on classification accuracy, using a softmax layer trained with backpropagation. |
+
+---
+
+#### Forward-Forward Algorithm Details:
+
+| **Cues/Keywords**                                   | **Main Notes**                                                                                                   |
+|-----------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| Training Process                                    | Positive and negative passes to adjust weights.                                                                  |
+| Positive Pass                                       | Increases the "goodness" of real data by updating weights accordingly.                                           |
+| Negative Pass                                       | Decreases the "goodness" of negative data by altering real data in specific ways.                                |
+| Goodness Function                                   | Sum of squares of activities of ReLU neurons, measuring network response to input data.                          |
+| Definition                                          | Goodness should be above a threshold for positive data and below for negative data.                              |
+| Objective                                           | Ensure network can distinguish between real and negative data effectively.                                        |
+| Prediction Methods                                  | Goodness prediction and softmax prediction.                                                                      |
+| Goodness Prediction                                 | Uses highest goodness score for prediction.                                                                      |
+| Softmax Prediction                                  | Uses a softmax layer to predict class, trained separately from FF layers.                                         |
+
+---
+
+#### Experimental Evaluation:
+
+| **Cues/Keywords**                                   | **Main Notes**                                                                                                   |
+|-----------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| Setup                                               | Network configuration, dataset, training, optimizer.                                                             |
+| Network Configuration                               | [784, 2000, 2000, 2000, 2000] with ReLU activations, input size 784, four hidden layers with 2000 neurons each.   |
+| Dataset                                             | MNIST with 60,000 training instances and 10,000 testing instances.                                               |
+| Training                                            | 100 epochs, 100 splits, mini-batches of size 64 for efficient gradient updates.                                   |
+| Optimizer                                           | Adam optimizer with specific learning rates for FF layers and softmax layer.                                      |
+| Results                                             | AdaptiveNEG, RandomNEG, Performance-Optimized PFF.                                                               |
+| AdaptiveNEG                                         | Selects negative data based on network performance, achieving high accuracy with reduced training time.           |
+| RandomNEG                                           | Selects random incorrect labels, faster but slightly lower accuracy.                                              |
+| Performance-Optimized PFF                           | New goodness function, significant speedup with minimal accuracy loss.                                           |
+
+---
+
+#### Comparison with Other Models:
+
+| **Cues/Keywords**                                   | **Main Notes**                                                                                                   |
+|-----------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| Hinton's Matlab Implementation                      | Baseline with 98.53% accuracy.                                                                                   |
+| DFF (Distributed FF)                                | 93.15% accuracy, slower training times.                                                                          |
+| PFF Variants                                        | Single-Layer: 98.43% accuracy, reduced training time.                                                            |
+|                                                    | All-Layers: 98.51% accuracy, fastest training times.                                                             |
+
+---
+
+#### Evaluation with CIFAR-10:
+
+| **Cues/Keywords**                                   | **Main Notes**                                                                                                   |
+|-----------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| Complexity                                          | CIFAR-10 dataset presents higher variability and complexity compared to MNIST.                                   |
+| Results                                             | Performance-Optimized PFF: 53.50% accuracy for CIFAR-10, indicates robustness of new goodness function.           |
+|                                                    | AdaptiveNEG Goodness: 11.10% accuracy, suggests need for further tuning for complex datasets.                     |
+| Implications                                        | Further research needed to optimize FF algorithm for complex datasets.                                           |
+
+---
+
+#### Conclusion and Future Work:
+
+| **Cues/Keywords**                                   | **Main Notes**                                                                                                   |
+|-----------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| Significance                                        | PFF algorithm offers more efficient and scalable distributed neural network training.                            |
+| Future Directions                                   | Parameter exchanges after each batch for finer weight tuning.                                                     |
+|                                                    | Implementing PFF in federated learning systems.                                                                  |
+|                                                    | Utilizing multi-GPU architectures to reduce communication overhead.                                              |
+|                                                    | Investigating new methods for generating negative samples.                                                       |
+|                                                    | Developing a comprehensive framework for training large neural networks using the PFF algorithm.                 |
+
+---
+
