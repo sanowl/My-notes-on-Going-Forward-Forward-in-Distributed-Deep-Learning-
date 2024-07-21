@@ -1,0 +1,124 @@
++---------------------------------------------------+
+| Going Forward-Forward in Distributed Deep Learning|
++---------------------------------------------------+
+                 |
+                 +------------------------------+
+                 |        Title & Authors       |
+                 | - Title: Going Forward-      |
+                 |   Forward                    |
+                 | - Authors: Ege Aktemur,      |
+                 |   Ege Zorlutuna, Kaan        |
+                 |   Bilgili, Tacettin Emre     |
+                 |   Bök, Berrin Yanikoglu,     |
+                 |   Süha Orhun Mutluergil      |
+                 | - Institution: Sabanci       |
+                 |   University, Istanbul,      |
+                 |   Turkey                     |
+                 +------------------------------+
+                 |
+                 +------------------------------+
+                 |          Abstract            |
+                 | - Objective: Introduce a     |
+                 |   new approach using         |
+                 |   Geoffrey Hinton’s          |
+                 |   Forward-Forward (FF)       |
+                 |   algorithm                  |
+                 | - Methodology: Dual forward  |
+                 |   passes instead of          |
+                 |   backpropagation            |
+                 | - Benefits: Efficient,       |
+                 |   biologically plausible,    |
+                 |   mimics brain processes     |
+                 | - Results: 3.75x speedup on  |
+                 |   MNIST, no accuracy loss    |
+                 | - Implications: Potential    |
+                 |   revolution in distributed  |
+                 |   training                   |
+                 +------------------------------+
+                 |
+                 +------------------------------+
+                 |        Introduction          |
+                 | - Traditional Backprop       |
+                 |   Challenges: Sequential     |
+                 |   nature, dependency, high   |
+                 |   communication overhead     |
+                 | - FF Algorithm: Local        |
+                 |   computations, dual forward |
+                 |   passes (positive &         |
+                 |   negative), biologically    |
+                 |   plausible                  |
+                 +------------------------------+
+                 |
+                 +------------------------------+
+                 |      Literature Review       |
+                 | - Existing Frameworks:       |
+                 |   PipeDream, GPipe, Local    |
+                 |   Parallelism                |
+                 | - FF Algorithm by Hinton:    |
+                 |   Concept, goodness function |
+                 +------------------------------+
+                 |
+                 +------------------------------+
+                 |         PFF Algorithm        |
+                 | - Integration: Improve       |
+                 |   efficiency in distributed  |
+                 |   training                   |
+                 | - Variants: Single-Layer     |
+                 |   PFF, All-Layers PFF,       |
+                 |   Federated PFF, Performance-|
+                 |   Optimized PFF              |
+                 +------------------------------+
+                 |
+                 +------------------------------+
+                 |     FF Algorithm Details     |
+                 | - Training Process: Positive |
+                 |   & negative passes          |
+                 | - Goodness Function: Sum of  |
+                 |   squares of neuron          |
+                 |   activities                 |
+                 | - Prediction Methods:        |
+                 |   Goodness prediction,       |
+                 |   softmax                    |
+                 +------------------------------+
+                 |
+                 +------------------------------+
+                 |  Experimental Evaluation     |
+                 | - Setup: Network config,     |
+                 |   dataset, training,         |
+                 |   optimizer                  |
+                 | - Results: AdaptiveNEG,      |
+                 |   RandomNEG, Performance-    |
+                 |   Optimized PFF              |
+                 +------------------------------+
+                 |
+                 +------------------------------+
+                 |  Comparison with Other Models|
+                 | - Hinton's Matlab            |
+                 |   Implementation             |
+                 | - DFF (Distributed FF)       |
+                 | - PFF Variants: Single-Layer,|
+                 |   All-Layers                 |
+                 +------------------------------+
+                 |
+                 +------------------------------+
+                 |  Evaluation with CIFAR-10    |
+                 | - Complexity: Higher         |
+                 |   variability and complexity |
+                 | - Results: Performance-      |
+                 |   Optimized PFF, AdaptiveNEG |
+                 | - Implications: Need for     |
+                 |   further research           |
+                 +------------------------------+
+                 |
+                 +------------------------------+
+                 | Conclusion and Future Work   |
+                 | - Significance: More         |
+                 |   efficient and scalable     |
+                 |   approach                   |
+                 | - Future Directions: Parameter|
+                 |   exchanges, federated       |
+                 |   learning, communication    |
+                 |   optimization, negative     |
+                 |   sample generation, general |
+                 |   framework development      |
+                 +------------------------------+
